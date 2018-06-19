@@ -123,5 +123,10 @@
       }
     }
   },
-  "defaultProject": "course"
+  "defaultProject": "course",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
