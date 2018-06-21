@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { Routing } from './app-routing.module';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { AppComponent } from './app.component';
 
@@ -9,6 +10,8 @@ import { HeaderComponent } from './header/header.component';
 import { CoursesListComponent } from './courses/courses-list.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { SearchComponent } from './search/search.component';
+import { CourseComponent } from './course/course.component';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +20,16 @@ import { SearchComponent } from './search/search.component';
     HeaderComponent,
     CoursesListComponent,
     BreadcrumbComponent,
-    SearchComponent
+    SearchComponent,
+    CourseComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
-    Routing
+    Routing,
+    MDBBootstrapModule.forRoot()
   ],
+  schemas: [ NO_ERRORS_SCHEMA ],
   providers: [],
   bootstrap: [AppComponent]
 })

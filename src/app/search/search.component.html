@@ -1,3 +1,11 @@
-<p>
-  search works!
-</p>
+<nav class="navbar navbar-dark blue">
+  <form class="form-inline">
+    <div class="md-form my-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" [value]="searchInput" (input)="searchInputUpdate($event.target.value)">
+    </div>
+    <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="button" (click)="searchSubmit()">Search</button>
+  </form>
+  <div class="my-1" id="newCourse">
+    <a class="btn btn-outline-white btn-sm my-0" routerLink="/login">Add course<i class="fa fa-wrench text-white"></i></a>
+  </div>
+</nav>

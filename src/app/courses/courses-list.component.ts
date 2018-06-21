@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Course } from '../model/course';
 
 @Component({
   selector: 'app-courses-list',
@@ -7,9 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoursesListComponent implements OnInit {
 
-  constructor() { }
+  courses: Array<Course>;
+
+  constructor() {
+    this.courses = [
+      {
+        id: 0,
+        title: 'Title of the news',
+        creationDate: new Date(),
+        duration: 5,
+        description: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.',
+      },
+      {
+        id: 1,
+        title: 'Title of the news',
+        creationDate: new Date(),
+        duration: 5,
+        description: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.',
+      }
+    ];
+  }
 
   ngOnInit() {
   }
 
+  onCancel(courseId: number) {
+    console.log(courseId);
+  }
 }
