@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-lg-5 col-xl-4">
+    <div class="view overlay rounded z-depth-1-half mb-lg-0 mb-4">
+      <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/images/49.jpg" alt="Sample image">
+      <a>
+        <div class="mask rgba-white-slight"></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="col-lg-7 col-xl-8">
+
+    <h3 class="font-weight-bold mb-3"><strong>{{ course.title }}</strong></h3>
+    <div>{{ course.duration }}, {{course.creationDate }}</div>
+    <p class="dark-grey-text">{{ course.description }}</p>
+    <button class="btn btn-primary btn-md" type="button">Edit</button>
+    <button class="btn btn-primary btn-md" type="button" (click)="cancelCourse(course.id)">Delete</button>
+
+  </div>
+</div>
