@@ -6,7 +6,7 @@ export interface CourseInterface {
     description: string;
 }
 
-export class Course implements CourseInterface {
+export class CourseModel implements CourseInterface {
     id = 0;
     title = '';
     creationDate = new Date();

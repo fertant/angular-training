@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { Course } from '../model/course';
+import { CourseModel } from '../../model/course';
 
 @Component({
   selector: 'app-course',
@@ -8,7 +8,7 @@ import { Course } from '../model/course';
 })
 export class CourseComponent implements OnInit {
 
-  @Input() course: Course;
+  @Input() course: CourseModel;
   @Output() cancel = new EventEmitter<number>();
 
   constructor() { }

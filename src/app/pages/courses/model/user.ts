@@ -4,7 +4,7 @@ export interface UserInterface {
     secondName: string;
 }
 
-export class User implements UserInterface {
+export class UserModel implements UserInterface {
     id = 0;
     firstName = '';
     secondName = '';
