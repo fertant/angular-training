@@ -7,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  private searchInput: string;
+  searchInput: string;
+  searchStart: boolean;
 
   constructor() {
     this.searchInput = '';
+    this.searchStart = false;
   }
 
   ngOnInit() {
@@ -21,6 +23,7 @@ export class SearchComponent implements OnInit {
   }
 
   public searchSubmit() {
+    this.searchStart = true;
     console.log(this.searchInput);
   }
 

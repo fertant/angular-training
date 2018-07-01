@@ -9,6 +9,7 @@ import { CourseModel } from '../model/course';
 export class CoursesListComponent implements OnInit {
 
   courses: Array<CourseModel>;
+  canceledCourse: number;
 
   constructor() {
     this.courses = [
@@ -33,6 +34,7 @@ export class CoursesListComponent implements OnInit {
   }
 
   onCancel(courseId: number) {
+    this.canceledCourse = courseId;
     console.log(courseId);
   }
 }

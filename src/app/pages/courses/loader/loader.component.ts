@@ -7,12 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoaderComponent implements OnInit {
 
-  constructor() { }
+  loading: boolean;
+
+  constructor() {
+    this.loading = false;
+  }
 
   ngOnInit() {
   }
 
   onLoad() {
+    this.loading = true;
     console.log('Loader click.');
   }
 }
