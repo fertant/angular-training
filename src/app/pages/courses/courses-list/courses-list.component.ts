@@ -18,14 +18,14 @@ export class CoursesListComponent implements OnInit {
         title: 'Title of the news',
         creationDate: new Date(),
         duration: 5,
-        description: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.',
+        description: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.',
       },
       {
         id: 1,
         title: 'Title of the news',
         creationDate: new Date(),
         duration: 5,
-        description: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.',
+        description: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.',
       }
     ];
   }
