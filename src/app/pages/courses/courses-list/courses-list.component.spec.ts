@@ -1,7 +1,13 @@
-
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CoursesListComponent } from './courses-list.component';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CourseModel } from '../model/course';
+
+@Component({selector: 'app-course', template: ''})
+class CourseStubComponent {
+  @Input() course: CourseModel;
+  @Output() cancel = new EventEmitter<number>();
+}
 
 describe('CoursesListComponent', () => {
   let component: CoursesListComponent;
@@ -9,7 +15,10 @@ describe('CoursesListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoursesListComponent ]
+      declarations: [
+        CoursesListComponent,
+        CourseStubComponent
+      ]
     })
     .compileComponents();
   }));
@@ -22,5 +31,10 @@ describe('CoursesListComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should raise selected course when event cancel trigger (triggerEventHandler)', () => {
+    component.onCancel(component.courses[1].id);
+    expect(component.canceledCourse).toEqual(1);
   });
 });

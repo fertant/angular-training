@@ -9,6 +9,7 @@ import { CourseModel } from '../model/course';
 export class CoursesListComponent implements OnInit {
 
   courses: Array<CourseModel>;
+  canceledCourse: number;
 
   constructor() {
     this.courses = [
@@ -17,14 +18,14 @@ export class CoursesListComponent implements OnInit {
         title: 'Title of the news',
         creationDate: new Date(),
         duration: 5,
-        description: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.',
+        description: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.',
       },
       {
         id: 1,
         title: 'Title of the news',
         creationDate: new Date(),
         duration: 5,
-        description: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.',
+        description: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.',
       }
     ];
   }
@@ -33,6 +34,7 @@ export class CoursesListComponent implements OnInit {
   }
 
   onCancel(courseId: number) {
+    this.canceledCourse = courseId;
     console.log(courseId);
   }
 }

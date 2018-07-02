@@ -13,8 +13,8 @@
     <h3 class="font-weight-bold mb-3"><strong>{{ course.title }}</strong></h3>
     <div>{{ course.duration }}, {{course.creationDate }}</div>
     <p class="dark-grey-text">{{ course.description }}</p>
-    <button class="btn btn-primary btn-md" type="button">Edit</button>
-    <button class="btn btn-primary btn-md" type="button" (click)="cancelCourse(course.id)">Delete</button>
+    <button class="btn btn-primary btn-md edit-course" type="button">Edit</button>
+    <button class="btn btn-primary btn-md cancel-course" type="button" (click)="cancelCourse(course.id)">Delete</button>
 
   </div>
 </div>
