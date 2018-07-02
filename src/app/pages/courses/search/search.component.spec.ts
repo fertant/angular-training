@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HTMLElement, HTMLInputElement } from '@angular/core';
 import { SearchComponent } from './search.component';
 
 describe('SearchComponent', () => {
