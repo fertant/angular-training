@@ -6,4 +6,4 @@ const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'courses' }
 ];
 
-export const Routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
+export const AppRoutingModule: ModuleWithProviders = RouterModule.forRoot(appRoutes);

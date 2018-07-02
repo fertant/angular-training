@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CoursesComponent } from './courses.component';
 
 const CoursesRoutes: Routes = [
-  { path: 'courses', component: CoursesComponent },
+  { path: '', component: CoursesComponent },
 ];
 
-export const CoursesRouting: ModuleWithProviders = RouterModule.forRoot(CoursesRoutes);
+export const CoursesRoutingModule: ModuleWithProviders = RouterModule.forChild(CoursesRoutes);

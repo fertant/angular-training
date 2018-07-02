@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CoursesRouting } from './courses-routing.module';
+import { CoursesRoutingModule } from './courses-routing.module';
 
 import { CoursesListModule } from './courses-list/courses-list.module';
 import { CoursesComponent } from './courses.component';
@@ -12,7 +12,7 @@ import { LoaderComponent } from './loader/loader.component';
   imports: [
     CommonModule,
     CoursesListModule,
-    CoursesRouting
+    CoursesRoutingModule
   ],
   declarations: [
     CoursesComponent,
