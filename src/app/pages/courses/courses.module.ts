@@ -17,7 +17,7 @@ import { LoaderComponent } from './loader/loader.component';
   declarations: [
     CoursesComponent,
     SearchComponent,
-    LoaderComponent
+    LoaderComponent,
   ],
   exports: [
     CoursesComponent
