@@ -1,12 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CoursesComponent } from './courses.component';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({selector: 'app-search', template: ''})
 class SearchStubComponent {}
 
 @Component({selector: 'app-courses-list', template: ''})
-class CoursesListStubComponent {}
+class CoursesListStubComponent {
+  @Input() search: string;
+}
 
 @Component({selector: 'app-loader', template: ''})
 class LoaderStubComponent {}

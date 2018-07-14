@@ -4,6 +4,7 @@ export interface CourseInterface {
     creationDate: Date;
     duration: number;
     description: string;
+    topRated?: boolean;
 }
 
 export class CourseModel implements CourseInterface {
@@ -12,4 +13,5 @@ export class CourseModel implements CourseInterface {
     creationDate = new Date();
     duration = 0;
     description = '';
+    topRated = false;
 }
