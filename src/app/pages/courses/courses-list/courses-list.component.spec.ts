@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {Pipe, PipeTransform} from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { CoursesListComponent } from './courses-list.component';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CourseModel } from '../model/course';
+import { CoursesService } from './courses.service';
 
 @Component({selector: 'app-course', template: ''})
 class CourseStubComponent {
@@ -39,7 +40,8 @@ describe('CoursesListComponent', () => {
         CourseStubComponent,
         OrderByCoursesStubPipe,
         FilterCoursesStubPipe
-      ]
+      ],
+      providers: [CoursesService],
     })
     .compileComponents();
   }));
@@ -55,7 +57,7 @@ describe('CoursesListComponent', () => {
   });
 
   it('should raise selected course when event cancel trigger (triggerEventHandler)', () => {
-    component.onCancel(component.courses[1].id);
+    component.onRemove(component.courses[1].id);
     expect(component.canceledCourse).toEqual(1);
   });
 });

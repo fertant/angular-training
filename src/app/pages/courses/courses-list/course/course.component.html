@@ -14,7 +14,30 @@
     <div>{{ course.duration | durationForming }}, {{ course.creationDate | date: 'dd.MM.yyyy' }}</div>
     <p class="dark-grey-text">{{ course.description }}</p>
     <button class="btn btn-primary btn-md edit-course" type="button">Edit</button>
-    <button class="btn btn-primary btn-md cancel-course" type="button" (click)="cancelCourse(course.id)">Delete</button>
+    <button class="btn btn-primary btn-md cancel-course" type="button" (click)="style.show()" mdbWavesEffect>Delete</button>
 
   </div>
+  <div mdbModal #style="mdb-modal" class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-success" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <p class="heading lead">Delete course</p>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="style.hide()">
+            <span aria-hidden="true" class="white-text">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center">
+            <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+            <p>Do you really want to delete this course? Yes/No</p>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <a type="button" class="btn btn-primary waves-light" mdbWavesEffect (click)="cancelCourse(course.id)">Yes<i class="ml-1 white-text"></i></a>
+          <a type="button" class="btn btn-outline-secondary" data-dismiss="modal" (click)="style.hide()" mdbWavesEffect>No</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+

@@ -46,7 +46,5 @@ describe('OrderByCoursesPipe', () => {
     expect(orderedTextDesc[0].id).toBe(2);
     const orderedTextAsc = pipe.transform(coursesStub, ['title']);
     expect(orderedTextAsc[0].id).toBe(0);
-    const orderedList = pipe.transform(coursesStub, [['title', 'creationDate']]);
-    expect(orderedList[0].id).toBe(0);
   });
 });

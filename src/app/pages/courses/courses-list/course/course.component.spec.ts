@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Pipe, PipeTransform } from '@angular/core';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { CourseComponent } from './course.component';
 import { CourseModel } from '../../model/course';
@@ -21,9 +22,13 @@ describe('CourseComponent', () => {
   let fixture: ComponentFixture<CourseComponent>;
   let courseStub: CourseModel;
   let courseDe: DebugElement;
+  let modalDe: DebugElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        MDBBootstrapModule.forRoot()
+      ],
       declarations: [
         CourseComponent,
         DurationFormingStubPipe,
@@ -50,6 +55,7 @@ describe('CourseComponent', () => {
     component.course = courseStub;
 
     courseDe = fixture.debugElement.query(By.css('.cancel-course'));
+    modalDe = fixture.debugElement.query(By.css('.cancel-course-modal'));
 
     fixture.detectChanges();
   });
@@ -62,13 +68,13 @@ describe('CourseComponent', () => {
     let selectedCourse: number;
     component.cancel.subscribe((id: number) => selectedCourse = id);
 
-    courseDe.triggerEventHandler('click', null);
+    component.cancelCourse(courseStub.id);
     expect(selectedCourse).toEqual(courseStub.id);
   });
 
   it('should have green border', () => {
     const div: HTMLElement = fixture.nativeElement.querySelector('.row');
-    const borderColor = div.style.borderColor;
-    expect(borderColor).toBe('green');
+    const borderColor = div.classList.contains('border-success');
+    expect(div.classList.contains('border-success')).toBe(true);
   });
 });
