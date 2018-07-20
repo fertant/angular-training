@@ -1,7 +1,7 @@
-<app-header></app-header>
+<app-header (isLogged)="onLogin($event)"></app-header>
 
 <div class="outer-wrapper">
-  <app-breadcrumb></app-breadcrumb>
+  <app-breadcrumb *ngIf="isLogged"></app-breadcrumb>
   <router-outlet></router-outlet>
 
   <main role="main" class="main"></main>
