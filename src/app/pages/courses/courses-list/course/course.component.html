@@ -13,7 +13,7 @@
     <h3 class="font-weight-bold mb-3"><strong>{{ course.title | uppercase }}<i [ngClass]="{'fa fa-star': course.topRated}"></i></strong></h3>
     <div>{{ course.duration | durationForming }}, {{ course.creationDate | date: 'dd.MM.yyyy' }}</div>
     <p class="dark-grey-text">{{ course.description }}</p>
-    <button class="btn btn-primary btn-md edit-course" type="button">Edit</button>
+    <button class="btn btn-primary btn-md edit-course" type="button" (click)="editCourse(course.id)">Edit</button>
     <button class="btn btn-primary btn-md cancel-course" type="button" (click)="style.show()" mdbWavesEffect>Delete</button>
 
   </div>

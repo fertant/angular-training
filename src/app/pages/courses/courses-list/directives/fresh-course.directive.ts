@@ -5,7 +5,7 @@ import { Directive, ElementRef, Renderer2, Input, OnChanges } from '@angular/cor
 })
 export class FreshCourseDirective implements OnChanges {
 
-  @Input('appFreshCourse') creationDate: Date;
+  @Input('appFreshCourse') appFreshCourse: Date;
 
   constructor(private el: ElementRef, public renderer: Renderer2) {
   }
@@ -13,7 +13,7 @@ export class FreshCourseDirective implements OnChanges {
   ngOnChanges() {
     const currentDate = new Date();
     const currentTime = currentDate.getTime();
-    const creationTime = this.creationDate.getTime();
+    const creationTime = this.appFreshCourse.getTime();
     const lastWeeks = currentTime - (14 * 24 * 60 * 60 * 1000);
     if (creationTime < currentTime && creationTime >= lastWeeks) {
       this.renderer.addClass(this.el.nativeElement, 'border');
