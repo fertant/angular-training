@@ -3,6 +3,7 @@ import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Pipe, PipeTransform } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { CourseComponent } from './course.component';
 import { CourseModel } from '../../model/course';
@@ -27,6 +28,7 @@ describe('CourseComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        RouterTestingModule,
         MDBBootstrapModule.forRoot()
       ],
       declarations: [

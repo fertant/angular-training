@@ -43,6 +43,11 @@ export class CoursesService {
   }
 
   addCourse(course: CourseModel) {
+    const courses = _.sortBy(this.courses, ['id']);
+    const ids = _.flatMap(courses, function (object) {
+      return [object.id];
+    });
+    course.id = _.last(ids) + 1;
     this.courses.push(course);
   }
 
