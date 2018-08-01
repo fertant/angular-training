@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthorizationService } from './core/shared/services/authorization.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +11,11 @@ export class AppComponent {
   title = 'app';
   isLogged: boolean;
 
-  constructor() {
-    this.isLogged = false;
+  constructor(
+    private loginService: AuthorizationService,
+    private router: Router
+  ) {
+    this.isLogged = this.loginService.isAuthenticated();
   }
 
   onLogin(isLogged: boolean) {

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { CanActivate } from '@angular/router';
 
 @Injectable()
-export class AuthorizationService {
+export class AuthorizationService implements CanActivate {
 
   constructor() { }
 
-  login(user: string, token: string) {
+  login(user: string, token: any) {
     localStorage.setItem('auth', JSON.stringify([user, token]));
   }
 
@@ -19,5 +20,9 @@ export class AuthorizationService {
 
   getUserInfo() {
     return JSON.parse(localStorage.getItem('auth'));
+  }
+
+  canActivate() {
+    return this.isAuthenticated();
   }
 }

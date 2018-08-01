@@ -13,6 +13,7 @@ import { LoaderComponent } from './loader/loader.component';
 import { EditCoursesComponent } from './edit-courses/edit-courses.component';
 import { DynamicFormComponent } from './form-elements/dynamic-form/dynamic-form.component';
 import { DynamicFormElementComponent } from './form-elements/dynamic-form-element/dynamic-form-element.component';
+import { AuthorizationService } from '../../core/shared/services/authorization.service';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { DynamicFormElementComponent } from './form-elements/dynamic-form-elemen
   ],
   exports: [
     CoursesComponent
-  ]
+  ],
+  providers: [AuthorizationService],
 })
 export class CoursesModule { }
