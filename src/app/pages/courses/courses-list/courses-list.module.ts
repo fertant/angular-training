@@ -21,7 +21,7 @@ import { CoursesService } from './courses.service';
     FreshCourseDirective,
     DurationFormingPipe,
     OrderByCoursesPipe,
-    FilterCoursesPipe,
+    FilterCoursesPipe
   ],
   exports: [
     CoursesListComponent

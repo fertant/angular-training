@@ -11,26 +11,22 @@ export class CoursesListComponent implements OnInit {
 
   courses: Array<CourseModel>;
   canceledCourse: number;
-  coursesService: CoursesService;
   @Input() search: string;
 
-  constructor(private service: CoursesService) {
-    this.courses = service.getCourses();
-    this.coursesService = service;
+  constructor(private coursesService: CoursesService) {
+    this.courses = coursesService.getCourses();
   }
 
   ngOnInit() {
   }
 
   isEmptyCourses(): boolean {
-    return this.courses.length === 0;
+    return !this.courses.length;
   }
 
   onRemove(courseId: number) {
-    const course = this.coursesService.findCourseById(courseId);
-    this.coursesService.removeCourse(course);
+    this.coursesService.removeCourse(courseId);
     this.courses = this.coursesService.getCourses();
     this.canceledCourse = courseId;
-    console.log(courseId);
   }
 }

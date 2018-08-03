@@ -43,6 +43,11 @@ export class CoursesService {
   }
 
   addCourse(course: CourseModel) {
+    const courses = _.sortBy(this.courses, ['id']);
+    const ids = _.flatMap(courses, function (object) {
+      return [object.id];
+    });
+    course.id = _.last(ids) + 1;
     this.courses.push(course);
   }
 
@@ -55,9 +60,7 @@ export class CoursesService {
     this.courses[index] = course;
   }
 
-  removeCourse(course: CourseModel) {
-    return _.remove(this.courses, function(c) {
-      return c.id === course.id;
-    });
+  removeCourse(id: number) {
+    this.courses = this.courses.filter(elem => elem.id !== id);
   }
 }

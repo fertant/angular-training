@@ -1,0 +1,39 @@
+<div [formGroup]="form">
+  <label [attr.for]="element.key">{{element.label}}</label>
+
+  <div [ngSwitch]="element.controlType">
+
+    <input *ngSwitchCase="'textbox'" [formControlName]="element.key"
+           [id]="element.key" [type]="element.type">
+
+    <textarea *ngSwitchCase="'textarea'" [formControlName]="element.key"
+           [id]="element.key"></textarea>
+
+    <div class="form-group" *ngSwitchCase="'multiselect'">
+      <angular2-multiselect [data]="element.options"
+                            [(ngModel)]="element.value"
+                            [settings]="element.settings"
+                            [formControlName]="element.key"
+                            [id]="element.key"
+                            element.required
+                            required>
+      </angular2-multiselect>
+    </div>
+
+    <div *ngSwitchCase="'datetimebox'" class="col-12 mb-3">
+      <div class="row justify-content-start">
+        <div class="">
+          <input [formControlName]="element.key" [id]="element.key" [owlDateTimeTrigger]="dt" [owlDateTime]="dt" placeholder="Set build(s) time(optional)" [min]="element.min" class="form-control">
+          <owl-date-time #dt></owl-date-time>
+        </div>
+        <div class="align-self-center owl-calendar ml-4">
+		  <span class="trigger" [owlDateTimeTrigger]="dt" >
+			<i class="fa fa-calendar"></i>
+		  </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="errorMessage" *ngIf="!isValid">{{element.label}} is required</div>
+</div>
