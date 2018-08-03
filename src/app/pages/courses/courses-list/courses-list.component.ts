@@ -25,10 +25,7 @@ export class CoursesListComponent implements OnInit {
   }
 
   onRemove(courseId: number) {
-    const course = this.coursesService.findCourseById(courseId);
-    if (course) {
-      this.coursesService.removeCourse(course);
-    }
+    this.coursesService.removeCourse(courseId);
     this.courses = this.coursesService.getCourses();
     this.canceledCourse = courseId;
   }

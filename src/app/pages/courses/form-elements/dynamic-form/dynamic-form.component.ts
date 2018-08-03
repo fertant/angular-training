@@ -25,9 +25,7 @@ export class DynamicFormComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    route.params.subscribe(params => {
-      this.id = params['id'];
-    });
+    this.id = +this.route.snapshot.paramMap.get('id');
   }
 
   ngOnInit() {
