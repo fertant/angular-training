@@ -32,8 +32,7 @@ describe('CoursesService', () => {
   }));
 
   it('should remove 1 course', inject([CoursesService], (service: CoursesService) => {
-    const course = service.findCourseById(0);
-    service.removeCourse(course);
+    service.removeCourse(0);
     expect(service.getCourses().length).toBe(2, 'Courses should be 2');
   }));
 

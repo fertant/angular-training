@@ -25,21 +25,19 @@ export class DynamicFormComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    route.params.subscribe(params => {
-      this.id = params['id'];
-    });
+    this.id = +this.route.snapshot.paramMap.get('id');
   }
 
   ngOnInit() {
     this.form = this.qcs.toFormGroup(this.elements);
     this.value
-      .subscribe(data => this.setFormVolues(data));
+      .subscribe(data => this.setFormValues(data));
     Object.keys(this.options).forEach(element => {
       this.options[element].subscribe(data => { this.elements[element].options = data; });
     });
   }
 
-  setFormVolues(data) {
+  setFormValues(data) {
     Object.keys(data).forEach(element => {
       if (this.form.controls.hasOwnProperty(element)) {
         this.form.controls[element].setValue(data[element]);

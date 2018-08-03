@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CourseModel } from '../model/course';
 import { CoursesService } from '../courses-list/courses.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,39 +13,27 @@ import { Observable } from 'rxjs';
   templateUrl: './edit-courses.component.html',
   styleUrls: ['./edit-courses.component.scss']
 })
-export class EditCoursesComponent implements OnInit {
+export class EditCoursesComponent {
 
   courses: Observable <CourseModel[]>;
   courseId: number;
   elements: FormElementBase<any>[];
   options: Array <any>;
-  coursesService: CoursesService;
-  routerNav: Router;
 
   constructor(
-    private service: CoursesService,
+    private coursesService: CoursesService,
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.routerNav = router;
-    this.coursesService = service;
-    route.params.subscribe(params => {
-      this.courseId = params['id'];
+    this.courseId = +this.route.snapshot.paramMap.get('id');
+    const course = this.courseId
+      ? this.coursesService.findCourseById(Number(this.courseId))
+      : [new CourseModel()];
+    this.courses = new Observable(observer => {
+      observer.next(course);
     });
-    if (this.courseId) {
-      this.courses = new Observable(observer => {
-        observer.next(this.coursesService.findCourseById(Number(this.courseId)));
-      });
-    } else {
-      this.courses = new Observable(observer => {
-        observer.next([new CourseModel()]);
-      });
-    }
     this.elements = this.extractData(new CourseModel());
     this.options = [];
-  }
-
-  ngOnInit() {
   }
 
   extractData(model: CourseModel) {
@@ -96,6 +84,6 @@ export class EditCoursesComponent implements OnInit {
     } else {
       this.coursesService.addCourse(course);
     }
-    this.routerNav.navigateByUrl('courses');
+    this.router.navigateByUrl('courses');
   }
 }
