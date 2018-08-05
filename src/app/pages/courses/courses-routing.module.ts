@@ -9,10 +9,4 @@ const CoursesRoutes: Routes = [
   { path: 'add-course', component: EditCoursesComponent, canActivate: [AuthorizationService], data: {breadcrumb: 'Add Course'} },
   { path: 'edit-course/:id', component: EditCoursesComponent, canActivate: [AuthorizationService], data: {breadcrumb: 'Edit Course'} },
 
-const CoursesRoutes: Routes = [
-  { path: '', component: CoursesComponent },
-  { path: 'add-course', component: EditCoursesComponent },
-  { path: 'edit-course/:id', component: EditCoursesComponent },
-];
-
 export const CoursesRoutingModule: ModuleWithProviders = RouterModule.forChild(CoursesRoutes);
