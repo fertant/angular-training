@@ -7,6 +7,7 @@ import { AuthorizationService } from '../../core/shared/services/authorization.s
 const CoursesRoutes: Routes = [
   { path: '', component: CoursesComponent, canActivate: [AuthorizationService] },
   { path: 'add-course', component: EditCoursesComponent, canActivate: [AuthorizationService], data: {breadcrumb: 'Add Course'} },
-  { path: 'edit-course/:id', component: EditCoursesComponent, canActivate: [AuthorizationService], data: {breadcrumb: 'Edit Course'} },
+  { path: 'edit-course/:id', component: EditCoursesComponent, canActivate: [AuthorizationService], data: {breadcrumb: 'Edit Course'} }
+];
 
 export const CoursesRoutingModule: ModuleWithProviders = RouterModule.forChild(CoursesRoutes);
