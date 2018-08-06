@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UsersService } from './users.service';
 import { AuthorizationService } from '../../core/shared/services/authorization.service';
 import { UserModel } from './model/user';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   user: UserModel = new UserModel();
   userValid = true;
@@ -20,19 +20,13 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {}
-
   onSubmit() {
-    const findUser = this.userService.isExist(this.user.email, this.user.password);
-    if (findUser) {
-      this.loginService.login(this.user.firstName, this.user.id);
-      this.router.navigateByUrl('courses');
-    } else {
-      this.userValid = false;
-    }
-  }
-
-  onCancel() {
-    this.router.navigateByUrl('courses');
+    this.userService.fetchUser(this.user.email, this.user.password)
+      .subscribe((res) => {
+        this.loginService.login(this.user.email, res.token);
+        this.router.navigateByUrl('courses');
+      }, (err) => {
+        this.userValid = false;
+      });
   }
 }

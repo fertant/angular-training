@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import * as _ from 'lodash';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 import { UserModel } from './model/user';
 
@@ -8,27 +9,13 @@ export class UsersService {
 
   users: Array<UserModel>;
 
-  constructor() {
-    this.users = [
-      {
-        id: 0,
-        email: 'sample@example.com',
-        password: 'admin',
-        firstName: 'Andrii',
-        lastName: 'Andrii'
-      },
-      {
-        id: 1,
-        email: 'sample1@example.com',
-        password: 'admin',
-        firstName: 'Andrii',
-        lastName: 'Andrii'
-      }
-    ];
-  }
+  constructor(private http: HttpClient) { }
 
-  isExist(email: string, password: string) {
-    const existingUser = _.find(this.users, { 'email': email, 'password': password });
-    return !!existingUser;
+  fetchUser(email: string, password: string): Observable<any> {
+    const body = {
+      login: email,
+      password: password
+    };
+    return this.http.post('http://localhost:3004/auth/login', body);
   }
 }
