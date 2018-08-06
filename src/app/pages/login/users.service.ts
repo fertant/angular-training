@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
+import { HttpClient } from '@angular/common/http';
 
 import { UserModel } from './model/user';
 
@@ -10,7 +11,7 @@ export class UsersService {
 
   users: Array<UserModel>;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.users = [
       {
         id: 0,
@@ -30,7 +31,13 @@ export class UsersService {
   }
 
   isExist(email: string, password: string) {
-    const existingUser = _.find(this.users, { 'email': email, 'password': password });
+    const body = {
+      login: email,
+      password: password
+    };
+    this.http.post('http://localhost:3004/auth/login', body)
+      .subscribe((res) => console.log(res.json()));
+    //const existingUser = _.find(this.users, { 'email': email, 'password': password });
     if (existingUser) {
       return true;
     } else {
