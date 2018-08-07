@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
+import { CanActivate } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Injectable()
-export class AuthorizationService {
+export class AuthorizationService implements CanActivate {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  login(user: string, token: string) {
+  login(user: string, token: any) {
     localStorage.setItem('auth', JSON.stringify([user, token]));
   }
 
@@ -14,10 +16,14 @@ export class AuthorizationService {
   }
 
   isAuthenticated() {
-    return null !== localStorage.getItem('auth');
+    return !!localStorage.getItem('auth');
   }
 
-  getUserInfo() {
-    return JSON.parse(localStorage.getItem('auth'));
+  canActivate() {
+    if (!this.isAuthenticated()) {
+      this.router.navigateByUrl('login');
+      return false;
+    }
+    return true;
   }
 }

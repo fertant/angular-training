@@ -1,3 +1,6 @@
 ol {
   margin-bottom: 0;
 }
+.breadcrumb-item::before {
+  display: none;
+}

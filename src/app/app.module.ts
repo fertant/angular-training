@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { SharedModule } from './core/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthorizationService } from './core/shared/services/authorization.service';
 
 import { AppComponent } from './app.component';
 import { Page404Component } from './pages/page404/page404.component';
@@ -21,7 +22,7 @@ import { Page404Component } from './pages/page404/page404.component';
     BrowserAnimationsModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  providers: [],
+  providers: [AuthorizationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

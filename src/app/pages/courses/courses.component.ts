@@ -11,8 +11,7 @@ export class CoursesComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   onSearch(searchValue: string) {
     this.searchValue = searchValue;

@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthorizationService } from '../../services/authorization.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,25 +10,24 @@ import { AuthorizationService } from '../../services/authorization.service';
 export class HeaderComponent implements OnInit {
 
   @Output() isLogged = new EventEmitter<boolean>();
-  authService: AuthorizationService;
 
-  constructor(private authorizationService: AuthorizationService) {
-    this.authService = authorizationService;
-  }
+  constructor(
+    public authService: AuthorizationService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.isLogged.emit(this.authService.isAuthenticated());
   }
 
   onLogin() {
-    this.authService.login('admin', 'access_token_123');
-    this.isLogged.emit(true);
-    console.log('User logged in.');
+    this.router.navigateByUrl('login');
   }
 
   onLogout() {
     this.authService.logout();
     this.isLogged.emit(false);
     console.log('User logged out.');
+    this.router.navigateByUrl('login');
   }
 }
