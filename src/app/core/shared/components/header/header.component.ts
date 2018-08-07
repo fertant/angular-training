@@ -10,14 +10,11 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   @Output() isLogged = new EventEmitter<boolean>();
-  authService: AuthorizationService;
 
   constructor(
-    private authorizationService: AuthorizationService,
+    public authService: AuthorizationService,
     private router: Router
-  ) {
-    this.authService = authorizationService;
-  }
+  ) { }
 
   ngOnInit() {
     this.isLogged.emit(this.authService.isAuthenticated());
@@ -31,5 +28,6 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
     this.isLogged.emit(false);
     console.log('User logged out.');
+    this.router.navigateByUrl('login');
   }
 }

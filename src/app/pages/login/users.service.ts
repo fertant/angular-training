@@ -3,9 +3,7 @@ import * as _ from 'lodash';
 
 import { UserModel } from './model/user';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class UsersService {
 
   users: Array<UserModel>;
@@ -31,10 +29,6 @@ export class UsersService {
 
   isExist(email: string, password: string) {
     const existingUser = _.find(this.users, { 'email': email, 'password': password });
-    if (existingUser) {
-      return true;
-    } else {
-      return false;
-    }
+    return !!existingUser;
   }
 }

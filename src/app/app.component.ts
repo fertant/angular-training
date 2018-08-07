@@ -17,8 +17,4 @@ export class AppComponent {
   ) {
     this.isLogged = this.loginService.isAuthenticated();
   }
-
-  onLogin(isLogged: boolean) {
-    this.isLogged = isLogged;
-  }
 }

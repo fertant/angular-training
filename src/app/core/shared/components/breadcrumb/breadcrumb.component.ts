@@ -18,7 +18,6 @@ export class BreadcrumbComponent implements OnInit {
   public breadcrumbs: IBreadcrumb[];
 
   /**
-   * @class DetailComponent
    * @constructor
    */
   constructor(
@@ -28,24 +27,19 @@ export class BreadcrumbComponent implements OnInit {
     this.breadcrumbs = [];
   }
 
-  /**
-   * Let's go!
-   *
-   * @class DetailComponent
-   * @method ngOnInit
-   */
   ngOnInit() {
     this.router.events.pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(event => {
         const root: ActivatedRoute = this.activatedRoute.root;
-        this.breadcrumbs = this.getBreadcrumbs(root);
+        // add root element to the route.
+        const url = `/${root.snapshot.pathFromRoot[0].children[0].url[0].path}`;
+        this.breadcrumbs = this.getBreadcrumbs(root, url);
     });
   }
 
   /**
    * Returns array of IBreadcrumb objects that represent the breadcrumb
    *
-   * @class DetailComponent
    * @method getBreadcrumbs
    * @param {ActivateRoute} route
    * @param {string} url
