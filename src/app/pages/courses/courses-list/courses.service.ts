@@ -1,66 +1,92 @@
 import { Injectable } from '@angular/core';
-import * as _ from 'lodash';
 import { CourseModel } from '../model/course';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CoursesService {
 
   courses: Array<CourseModel>;
+  page: number;
 
-  constructor() {
-    this.courses = [
-      {
-        id: 0,
-        title: 'Title of the news1',
-        creationDate: new Date(),
-        duration: 5,
-        description: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.',
-        topRated: true,
-      },
-      {
-        id: 1,
-        title: 'Title of the news2',
-        creationDate: new Date('09.07.2018'),
-        duration: 5,
-        description: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.',
-        topRated: false,
-      },
-      {
-        id: 2,
-        title: 'Title of the news3',
-        creationDate: new Date('05.07.2018'),
-        duration: 5,
-        description: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.',
-        topRated: false,
-      }
-    ];
+  constructor(private http: HttpClient) {
+    this.page = 0;
   }
 
-  getCourses() {
-    return this.courses;
+  getCurrentPage() {
+    return this.page;
+  }
+
+  setCurrentPage(page: number) {
+    this.page = page;
+  }
+
+  getCourses(offset?: number, limit?: number, search?: string) {
+    const url = 'http://localhost:3004/courses';
+    let query = '?';
+    query += 'start=';
+    query += offset ? offset : 0;
+    query += '&count=';
+    query += limit ? limit : 3;
+    query += search ? '&textFragment=' + search : '';
+    return this.http.get(url + query)
+      .pipe(
+        map(res => {
+          return Object.values(res).map(item => {
+            return new CourseModel(
+              item['id'],
+              item['name'],
+              new Date(item['date']),
+              item['length'],
+              item['description'],
+              item['isTopRated']
+            );
+          });
+        })
+      );
   }
 
   addCourse(course: CourseModel) {
-    const courses = _.sortBy(this.courses, ['id']);
-    const ids = _.flatMap(courses, function (object) {
-      return [object.id];
-    });
-    course.id = _.last(ids) + 1;
-    this.courses.push(course);
+    const body = {
+      id: course.id,
+      name: course.title,
+      date: course.creationDate,
+      length: course.duration,
+      description: course.description,
+      isTopRated: course.topRated
+    };
+    return this.http.post('http://localhost:3004/courses', body);
   }
 
   findCourseById(id: number) {
-    return _.find(this.courses, ['id', id]);
+    return this.http.get('http://localhost:3004/courses/' + id)
+      .pipe(
+        map(item => {
+          return new CourseModel(
+            item['id'],
+            item['name'],
+            new Date(item['date']),
+            item['length'],
+            item['description'],
+            item['isTopRated']
+          );
+        })
+      );
   }
 
   updateCourse(id: number, course: CourseModel) {
-    const index = _.findKey(this.courses, ['id', id]);
-    this.courses[index] = course;
+    const body = {
+      id: id,
+      name: course.title,
+      date: course.creationDate,
+      length: course.duration,
+      description: course.description,
+      isTopRated: course.topRated
+    };
+    return this.http.put('http://localhost:3004/courses/' + id, body);
   }
 
   removeCourse(id: number) {
-    this.courses = this.courses.filter(elem => elem.id !== id);
+    return this.http.delete('http://localhost:3004/courses/' + id);
   }
 }

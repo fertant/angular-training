@@ -2,9 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
+import { HttpClientModule } from '@angular/common/http';
 
 import { FormElementBase } from '../form-elements/form-element-base';
 import { EditCoursesComponent } from './edit-courses.component';
+import { CoursesService } from '../courses-list/courses.service';
 
 @Component({selector: 'app-dynamic-form', template: ''})
 class FormStubComponent {
@@ -21,12 +23,14 @@ describe('EditCoursesComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientModule
       ],
       declarations: [
         EditCoursesComponent,
         FormStubComponent
-      ]
+      ],
+      providers: [ CoursesService ]
     })
     .compileComponents();
   }));

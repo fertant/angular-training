@@ -8,6 +8,7 @@ class SearchStubComponent {}
 @Component({selector: 'app-courses-list', template: ''})
 class CoursesListStubComponent {
   @Input() search: string;
+  @Input() page: number;
 }
 
 @Component({selector: 'app-loader', template: ''})
