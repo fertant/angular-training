@@ -1,23 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { CoursesService } from '../courses-list/courses.service';
 
 @Component({
   selector: 'app-loader',
   templateUrl: './loader.component.html',
   styleUrls: ['./loader.component.scss']
 })
-export class LoaderComponent implements OnInit {
+export class LoaderComponent {
 
+  @Output() page = new EventEmitter<number>();
+  currentPage: number;
   loading: boolean;
 
-  constructor() {
+  constructor(private coursesService: CoursesService) {
     this.loading = false;
   }
 
-  ngOnInit() {
-  }
-
   onLoad() {
-    this.loading = true;
+    this.currentPage = this.coursesService.getCurrentPage();
+    this.page.emit(this.currentPage);
     console.log('Loader click.');
+    this.loading = true;
   }
 }

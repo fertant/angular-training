@@ -4,6 +4,7 @@ import { CoursesListComponent } from './courses-list.component';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CourseModel } from '../model/course';
 import { CoursesService } from './courses.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({selector: 'app-course', template: ''})
 class CourseStubComponent {
@@ -35,13 +36,14 @@ describe('CoursesListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ HttpClientModule ],
       declarations: [
         CoursesListComponent,
         CourseStubComponent,
         OrderByCoursesStubPipe,
         FilterCoursesStubPipe
       ],
-      providers: [CoursesService],
+      providers: [ CoursesService ],
     })
     .compileComponents();
   }));
@@ -54,10 +56,5 @@ describe('CoursesListComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should raise selected course when event cancel trigger (triggerEventHandler)', () => {
-    component.onRemove(component.courses[1].id);
-    expect(component.canceledCourse).toEqual(1);
   });
 });

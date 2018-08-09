@@ -23,13 +23,13 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
-    const findUser = this.userService.isExist(this.user.email, this.user.password);
-    if (findUser) {
-      this.loginService.login(this.user.firstName, this.user.id);
-      this.router.navigateByUrl('courses');
-    } else {
-      this.userValid = false;
-    }
+    this.userService.fetchUser(this.user.email, this.user.password)
+      .subscribe((res) => {
+        this.loginService.login(this.user.email, res.token);
+        this.router.navigateByUrl('courses');
+      }, (err) => {
+        this.userValid = false;
+      });
   }
 
   onCancel() {

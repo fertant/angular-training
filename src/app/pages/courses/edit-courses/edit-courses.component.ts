@@ -6,7 +6,7 @@ import { FormElementBase } from '../form-elements/form-element-base';
 import { TextboxElement } from '../form-elements/element-textbox';
 import { TextareaElement } from '../form-elements/element-textarea';
 import { DatetimeElement } from '../form-elements/element-datetime';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-edit-courses',
@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 })
 export class EditCoursesComponent {
 
-  courses: Observable <CourseModel[]>;
+  courses: Observable <CourseModel>;
   courseId: number;
   elements: FormElementBase<any>[];
   options: Array <any>;
@@ -26,12 +26,9 @@ export class EditCoursesComponent {
     private router: Router
   ) {
     this.courseId = +this.route.snapshot.paramMap.get('id');
-    const course = this.courseId
+    this.courses = this.courseId
       ? this.coursesService.findCourseById(Number(this.courseId))
-      : [new CourseModel()];
-    this.courses = new Observable(observer => {
-      observer.next(course);
-    });
+      : of(new CourseModel());
     this.elements = this.extractData(new CourseModel());
     this.options = [];
   }
@@ -80,10 +77,11 @@ export class EditCoursesComponent {
 
   onSubmit(course: CourseModel) {
     if (course.id) {
-      this.coursesService.updateCourse(course.id, course);
+      this.coursesService.updateCourse(course.id, course)
+        .subscribe((res) => { this.router.navigateByUrl('courses', { skipLocationChange: false }); });
     } else {
-      this.coursesService.addCourse(course);
+      this.coursesService.addCourse(course)
+        .subscribe((res) => { this.router.navigateByUrl('courses', { skipLocationChange: false }); });
     }
-    this.router.navigateByUrl('courses');
   }
 }
