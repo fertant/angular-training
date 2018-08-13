@@ -22,14 +22,18 @@ export class CoursesService {
   }
 
   getCourses(offset?: number, limit?: number, search?: string) {
-    const url = 'http://localhost:3004/courses';
-    let query = '?';
-    query += 'start=';
-    query += offset ? offset : 0;
-    query += '&count=';
-    query += limit ? limit : 3;
-    query += search ? '&textFragment=' + search : '';
-    return this.http.get(url + query)
+    offset = offset ? offset : 0;
+    limit = limit ? limit : 3;
+    const url = 'http://localhost:3004/courses?';
+    const attr = [
+      `start=${offset}`,
+      `count=${limit}`
+    ];
+    if (search) {
+      attr.push(`textFragment=${search}`);
+    }
+
+    return this.http.get(url + attr.join('&'))
       .pipe(
         map(res => {
           return Object.values(res).map(item => {
