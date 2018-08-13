@@ -16,14 +16,14 @@ export class AuthorizationService implements CanActivate {
   }
 
   isAuthenticated() {
-    return !!localStorage.getItem('auth');
+    return null !== localStorage.getItem('auth');
+  }
+
+  getUserInfo() {
+    return JSON.parse(localStorage.getItem('auth'));
   }
 
   canActivate() {
-    if (!this.isAuthenticated()) {
-      this.router.navigateByUrl('login');
-      return false;
-    }
-    return true;
+    return this.isAuthenticated();
   }
 }
