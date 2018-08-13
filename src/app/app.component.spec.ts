@@ -1,6 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { Component } from '@angular/core';
+import { AuthorizationService } from './core/shared/services/authorization.service';
 
 @Component({selector: 'app-header', template: ''})
 class HeaderStubComponent {}
@@ -24,7 +25,8 @@ describe('AppComponent', () => {
         BreadcrumbStubComponent,
         FooterStubComponent,
         RouterOutletStubComponent
-      ]
+      ],
+      providers: [ AuthorizationService ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {

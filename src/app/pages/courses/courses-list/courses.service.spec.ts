@@ -1,13 +1,62 @@
 import { TestBed, inject } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClient } from '@angular/common/http';
 
 import { CoursesService } from './courses.service';
 import { CourseModel } from '../model/course';
 
 describe('CoursesService', () => {
+  let httpClient: HttpClient;
+  let httpTestingController: HttpTestingController;
+  let coursesStub: Array<any>;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [CoursesService]
+      imports: [ HttpClientTestingModule ],
+      providers: [ CoursesService ]
     });
+    httpClient = TestBed.get(HttpClient);
+    httpTestingController = TestBed.get(HttpTestingController);
+    coursesStub = [
+      {
+        id: 8693,
+        name: 'duis mollit reprehenderit ad',
+        description: 'Est minim ea aute sunt laborum minim eu excepteur.',
+        isTopRated: false,
+        date: '2017-09-28T04:39:24+00:00',
+        authors: [
+          {
+            id: 1370,
+            firstName: 'Polly',
+            lastName: 'Sosa'
+          }
+        ],
+        length: 157
+      },
+      {
+        name: 'duis mollit reprehenderit ad 23',
+        description: 'Est minim ea aute sunt laborum minim eu excepteur.',
+        isTopRated: false,
+        date: '2018-08-23T12:03:25.000Z',
+        authors: [
+          {
+            id: 1370,
+            firstName: 'Polly',
+            lastName: 'Sosa'
+          }
+        ],
+        length: 157,
+        id: 9818
+      },
+      {
+        name: 'duis mollit reprehenderit ad 1235',
+        description: 'vbdfjklmcl;',
+        isTopRated: false,
+        date: '2017-08-10T04:39:24+00:00',
+        length: 157,
+        id: 9819
+      }
+    ];
   });
 
   it('should be created', inject([CoursesService], (service: CoursesService) => {
@@ -15,25 +64,43 @@ describe('CoursesService', () => {
   }));
 
   it('should 3 courses', inject([CoursesService], (service: CoursesService) => {
-    expect(service.getCourses().length).toBe(3, 'Courses should be 3');
+    const courseData = new CourseModel(
+      8693,
+      'duis mollit reprehenderit ad',
+      new Date('2017-09-28T04:39:24+00:00'),
+      157,
+      'Est minim ea aute sunt laborum minim eu excepteur.',
+      false
+    );
+    service.getCourses()
+      .subscribe(data => {
+        expect(data.length).toEqual(3);
+        expect(data[0].duration).toEqual(courseData.duration);
+      });
+    const req = httpTestingController.expectOne('http://localhost:3004/courses?start=0&count=3');
+    req.flush(coursesStub);
+    httpTestingController.verify();
   }));
 
   it('should find 1 course', inject([CoursesService], (service: CoursesService) => {
-    const courses = service.getCourses();
-    const course1 = service.findCourseById(0);
-    expect(course1).toEqual(courses[0]);
-    const course2 = service.findCourseById(10);
-    expect(course2).toEqual(undefined);
+    const courseData = new CourseModel(
+      8693,
+      'duis mollit reprehenderit ad',
+      new Date('2017-09-28T04:39:24+00:00'),
+      157,
+      'Est minim ea aute sunt laborum minim eu excepteur.',
+      false
+    );
+    service.findCourseById(8693)
+      .subscribe(data => {
+        expect(data.id).toEqual(8693);
+      });
+    const req = httpTestingController.expectOne('http://localhost:3004/courses/8693');
+    req.flush(coursesStub[0]);
+    httpTestingController.verify();
   }));
 
-  it('should add 1 course', inject([CoursesService], (service: CoursesService) => {
-    service.addCourse(new CourseModel());
-    expect(service.getCourses().length).toBe(4, 'Courses should be 4');
-  }));
-
-  it('should remove 1 course', inject([CoursesService], (service: CoursesService) => {
-    service.removeCourse(0);
-    expect(service.getCourses().length).toBe(2, 'Courses should be 2');
-  }));
-
+  afterEach(() => {
+    httpTestingController.verify();
+  });
 });

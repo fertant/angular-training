@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { LoaderComponent } from './loader.component';
+import { CoursesService } from '../courses-list/courses.service';
 
 describe('LoaderComponent', () => {
   let component: LoaderComponent;
@@ -10,7 +12,9 @@ describe('LoaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoaderComponent ]
+      imports: [ HttpClientModule ],
+      declarations: [ LoaderComponent ],
+      providers: [ CoursesService ]
     })
     .compileComponents();
   }));

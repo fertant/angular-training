@@ -22,6 +22,6 @@ import { AuthorizationService } from './services/authorization.service';
     HeaderComponent,
     BreadcrumbComponent
   ],
-  providers:  [AuthorizationService]
+  providers: [AuthorizationService]
 })
 export class SharedModule { }
