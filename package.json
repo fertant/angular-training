@@ -30,6 +30,7 @@
     "jquery": "^1.9.1",
     "lodash": "^4.17.10",
     "ng-pick-datetime": "^6.0.10",
+    "ngx-spinner": "^6.1.2",
     "popper.js": "^1.14.3",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"

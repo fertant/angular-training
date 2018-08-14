@@ -5,6 +5,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { SharedModule } from './core/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthorizationService } from './core/shared/services/authorization.service';
+import { UsersService } from './pages/login/users.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -28,7 +29,8 @@ import { InterceptorService } from './core/shared/services/interceptor.service';
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [
     AuthorizationService,
-    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+    UsersService
   ],
   bootstrap: [AppComponent]
 })

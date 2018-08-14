@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { CoursesListComponent } from './courses-list.component';
 import { CourseComponent } from './course/course.component';
@@ -13,7 +14,8 @@ import { CoursesService } from './courses.service';
 @NgModule({
   imports: [
     CommonModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    NgxSpinnerModule
   ],
   declarations: [
     CoursesListComponent,

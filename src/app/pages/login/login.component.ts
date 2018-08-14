@@ -3,6 +3,7 @@ import { UsersService } from './users.service';
 import { AuthorizationService } from '../../core/shared/services/authorization.service';
 import { UserModel } from './model/user';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -17,16 +18,20 @@ export class LoginComponent {
   constructor(
     private userService: UsersService,
     private loginService: AuthorizationService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private spinner: NgxSpinnerService
+  ) { }
 
   onSubmit() {
+    this.spinner.show();
     this.userService.fetchUser(this.user.email, this.user.password)
       .subscribe((res) => {
-        this.loginService.login(this.user.email, res.token);
+        this.loginService.login(this.user.email, res);
+        this.spinner.hide();
         this.router.navigateByUrl('courses');
       }, (err) => {
         this.userValid = false;
+        this.spinner.hide();
       });
   }
 }

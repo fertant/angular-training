@@ -1,4 +1,5 @@
-<div class="courses-wrapper" *ngIf="!loading">
+<ngx-spinner></ngx-spinner>
+<div class="courses-wrapper">
   <section class="my-5" *ngIf="!isEmptyCourses()">
     <div *ngFor="let course of courses">
       <app-course [course]="course" (cancel)="onRemove($event)"></app-course>

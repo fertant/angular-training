@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, SimpleChange } from '@angular/core';
 import { Subject } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { CourseModel } from '../model/course';
 import { CoursesService } from './courses.service';
@@ -14,11 +15,13 @@ export class CoursesListComponent implements OnChanges {
 
   courses: Array<CourseModel>;
   canceledCourse: number;
-  loading = true;
   @Input() search: string;
   @Input() page: number;
 
-  constructor(private coursesService: CoursesService) {
+  constructor(
+    private coursesService: CoursesService,
+    private spinner: NgxSpinnerService
+  ) {
     this.courses = [];
     this.page = this.page ? this.page : 0;
     this.fetchCourses(this.page, this.search, false);
@@ -56,9 +59,10 @@ export class CoursesListComponent implements OnChanges {
 
   fetchCourses(offset: number, search: string, loadMore: boolean) {
     const limit = 3;
+    this.spinner.show();
     this.coursesService.getCourses(offset, limit, search)
       .pipe(
-        tap(res => { this.loading = false; })
+        tap(res => { this.spinner.hide(); })
       )
       .subscribe(res => {
         if (loadMore) {

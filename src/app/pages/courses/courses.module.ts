@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { CoursesRoutingModule } from './courses-routing.module';
 
@@ -24,7 +25,8 @@ import { AuthorizationService } from '../../core/shared/services/authorization.s
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    AngularMultiSelectModule
+    AngularMultiSelectModule,
+    NgxSpinnerModule
   ],
   declarations: [
     CoursesComponent,
