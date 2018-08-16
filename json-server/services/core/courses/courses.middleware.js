@@ -21,8 +21,8 @@ module.exports = (server) => {
 			to = courses.length;
 		}
 		courses = courses.slice(from, to);
-		
-		res.json(courses);
+
+		setTimeout(function() { res.json(courses); }, 2500);
 	});
 	
 	return router;

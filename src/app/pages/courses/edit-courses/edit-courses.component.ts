@@ -7,6 +7,7 @@ import { TextboxElement } from '../form-elements/element-textbox';
 import { TextareaElement } from '../form-elements/element-textarea';
 import { DatetimeElement } from '../form-elements/element-datetime';
 import { Observable, of } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-edit-courses',
@@ -23,7 +24,8 @@ export class EditCoursesComponent {
   constructor(
     private coursesService: CoursesService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) {
     this.courseId = +this.route.snapshot.paramMap.get('id');
     this.courses = this.courseId
@@ -78,10 +80,16 @@ export class EditCoursesComponent {
   onSubmit(course: CourseModel) {
     if (course.id) {
       this.coursesService.updateCourse(course.id, course)
-        .subscribe((res) => { this.router.navigateByUrl('courses', { skipLocationChange: false }); });
+        .subscribe((res) => {
+          this.spinner.hide();
+          this.router.navigateByUrl('courses', { skipLocationChange: false });
+      });
     } else {
       this.coursesService.addCourse(course)
-        .subscribe((res) => { this.router.navigateByUrl('courses', { skipLocationChange: false }); });
+        .subscribe((res) => {
+          this.spinner.hide();
+          this.router.navigateByUrl('courses', { skipLocationChange: false });
+      });
     }
   }
 }

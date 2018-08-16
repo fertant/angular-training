@@ -5,8 +5,10 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { SharedModule } from './core/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthorizationService } from './core/shared/services/authorization.service';
+import { UsersService } from './pages/login/users.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppComponent } from './app.component';
 import { Page404Component } from './pages/page404/page404.component';
@@ -23,12 +25,14 @@ import { InterceptorService } from './core/shared/services/interceptor.service';
     SharedModule,
     AppRoutingModule,
     MDBBootstrapModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxSpinnerModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [
     AuthorizationService,
-    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+    UsersService
   ],
   bootstrap: [AppComponent]
 })

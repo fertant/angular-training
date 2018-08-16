@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { AuthorizationService } from '../../services/authorization.service';
 import { Router } from '@angular/router';
+
+import { AuthorizationService } from '../../services/authorization.service';
+import { UsersService } from '../../../../pages/login/users.service';
 
 @Component({
   selector: 'app-header',
@@ -9,15 +11,29 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  userName: string;
   @Output() isLogged = new EventEmitter<boolean>();
 
   constructor(
     public authService: AuthorizationService,
+    private userService: UsersService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.isLogged.emit(this.authService.isAuthenticated());
+    if (this.authService.isAuthenticated()) {
+      this.isLogged.emit(true);
+      this.setUser();
+    } else {
+      this.isLogged.emit(false);
+    }
+  }
+
+  setUser() {
+    this.userService.fetchUserInfo(this.authService.getUserToken())
+      .subscribe((res) => {
+         this.userName = `${res.name.first} ${res.name.last}`;
+      });
   }
 
   onLogin() {

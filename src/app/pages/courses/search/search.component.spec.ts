@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './search.component';
 
 describe('SearchComponent', () => {
@@ -7,6 +8,10 @@ describe('SearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        FormsModule,
+        ReactiveFormsModule,
+      ],
       declarations: [ SearchComponent ]
     })
     .compileComponents();
@@ -25,17 +30,29 @@ describe('SearchComponent', () => {
   it('should search for text', () => {
     const hostElement = fixture.nativeElement;
     const nameInput: HTMLInputElement = hostElement.querySelector('input');
-    const searchButton: HTMLElement = hostElement.querySelector('button');
+    fixture.detectChanges();
+    expect(component.searchStart).toBe(false);
+
+    // simulate user entering a new too short phrase.
+    component.searchInput.setValue('s', {
+      onlySelf: false,
+      emitEvent: true,
+      emitModelToViewChange: true,
+      emitViewToModelChange: true
+    });
+
+    fixture.detectChanges();
+    expect(component.searchStart).toBe(false);
 
     // simulate user entering a new search phrase into the input box
-    nameInput.value = 'search element';
-    nameInput.dispatchEvent(new Event('input'));
+    component.searchInput.setValue('search element', {
+      onlySelf: false,
+      emitEvent: true,
+      emitModelToViewChange: true,
+      emitViewToModelChange: true
+    });
+
     fixture.detectChanges();
-    expect(component.searchInput).toBe('search element');
-    expect(component.searchStart).toBe(false);
-    searchButton.click();
-    fixture.detectChanges();
-    expect(component.searchInput).toBe('search element');
     expect(component.searchStart).toBe(true);
   });
 });

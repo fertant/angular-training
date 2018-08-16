@@ -1,7 +1,8 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AuthorizationService } from './core/shared/services/authorization.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 @Component({selector: 'app-header', template: ''})
 class HeaderStubComponent {}
@@ -19,6 +20,7 @@ class FooterStubComponent {}
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ RouterTestingModule ],
       declarations: [
         AppComponent,
         HeaderStubComponent,
@@ -26,7 +28,8 @@ describe('AppComponent', () => {
         FooterStubComponent,
         RouterOutletStubComponent
       ],
-      providers: [ AuthorizationService ]
+      providers: [ AuthorizationService ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
     }).compileComponents();
   }));
   it('should create the app', async(() => {

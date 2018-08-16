@@ -11,13 +11,15 @@ module.exports = (server) => {
 				return user.login.toUpperCase() === req.body.login.toUpperCase();
 			});
 
-		if(!matchedUser) {
-			res.status(401).send('Wrong username');
-		} else if(matchedUser.password === req.body.password) {
-			res.json({ token: matchedUser.fakeToken});
-		} else {
-			res.status(401).send("Wrong password");
-		}
+  	setTimeout(function() {
+      if(!matchedUser) {
+        res.status(401).send('Wrong username');
+      } else if(matchedUser.password === req.body.password) {
+        res.json({ token: matchedUser.fakeToken});
+      } else {
+        res.status(401).send("Wrong password");
+      }
+  	}, 2500);
 	});
 		
 	router.post('/auth/userinfo', (req, res, next) => {
