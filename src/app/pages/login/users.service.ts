@@ -20,12 +20,6 @@ export class UsersService {
   }
 
   fetchUserInfo(token: string): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': token
-      })
-    };
     return this.http.post('http://localhost:3004/auth/userInfo', null, {});
   }
 }

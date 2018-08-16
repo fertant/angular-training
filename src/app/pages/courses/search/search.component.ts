@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounce, filter, map, tap, switchMap } from 'rxjs/operators';
+import { debounceTime, filter, map, tap, switchMap } from 'rxjs/operators';
 import { timer } from 'rxjs';
 
 @Component({
@@ -22,10 +22,9 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     this.searchInput.valueChanges
       .pipe(
-        map((query: string) => query.trim()),
         filter((query: string) => query && query.length >= 3),
-        debounce(() => timer(250)),
         tap((query) => { this.searchStart = true; }),
+        debounceTime(250),
       )
       .subscribe(query => this.search.emit(query));
   }

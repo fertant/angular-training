@@ -59,11 +59,7 @@ export class CoursesListComponent implements OnChanges {
 
   fetchCourses(offset: number, search: string, loadMore: boolean) {
     const limit = 3;
-    this.spinner.show();
     this.coursesService.getCourses(offset, limit, search)
-      .pipe(
-        tap(res => { this.spinner.hide(); })
-      )
       .subscribe(res => {
         if (loadMore) {
           this.courses = this.courses.concat(Object.values(res));
@@ -71,6 +67,7 @@ export class CoursesListComponent implements OnChanges {
           this.courses = Object.values(res);
         }
         this.coursesService.setCurrentPage(offset + limit);
+        this.spinner.hide();
       });
   }
 }

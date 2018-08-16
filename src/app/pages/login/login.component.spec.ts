@@ -6,6 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { LoginComponent } from './login.component';
 
 import { AuthorizationService } from '../../core/shared/services/authorization.service';
+import { UsersService } from './users.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -19,7 +20,10 @@ describe('LoginComponent', () => {
         FormsModule
       ],
       declarations: [ LoginComponent ],
-      providers: [ AuthorizationService ]
+      providers: [
+        AuthorizationService,
+        UsersService
+      ]
     })
     .compileComponents();
   }));

@@ -4,6 +4,7 @@ import { FormElementBase } from '../form-element-base';
 import { FormElementControlService } from '../form-element-control.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -23,7 +24,8 @@ export class DynamicFormComponent implements OnInit {
   constructor(
     private qcs: FormElementControlService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) {
     this.id = +this.route.snapshot.paramMap.get('id');
   }
@@ -31,7 +33,10 @@ export class DynamicFormComponent implements OnInit {
   ngOnInit() {
     this.form = this.qcs.toFormGroup(this.elements);
     this.value
-      .subscribe(data => this.setFormValues(data));
+      .subscribe(data => {
+        this.setFormValues(data);
+        this.spinner.hide();
+      });
     Object.keys(this.options).forEach(element => {
       this.options[element].subscribe(data => { this.elements[element].options = data; });
     });

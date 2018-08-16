@@ -8,6 +8,7 @@ import { AuthorizationService } from './core/shared/services/authorization.servi
 import { UsersService } from './pages/login/users.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppComponent } from './app.component';
 import { Page404Component } from './pages/page404/page404.component';
@@ -24,7 +25,8 @@ import { InterceptorService } from './core/shared/services/interceptor.service';
     SharedModule,
     AppRoutingModule,
     MDBBootstrapModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxSpinnerModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [

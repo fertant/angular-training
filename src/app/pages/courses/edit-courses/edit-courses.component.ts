@@ -78,7 +78,6 @@ export class EditCoursesComponent {
   }
 
   onSubmit(course: CourseModel) {
-    this.spinner.show();
     if (course.id) {
       this.coursesService.updateCourse(course.id, course)
         .subscribe((res) => {

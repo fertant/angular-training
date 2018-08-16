@@ -23,7 +23,6 @@ export class LoginComponent {
   ) { }
 
   onSubmit() {
-    this.spinner.show();
     this.userService.fetchUser(this.user.email, this.user.password)
       .subscribe((res) => {
         this.loginService.login(this.user.email, res);

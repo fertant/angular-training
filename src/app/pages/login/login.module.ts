@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { UsersService } from './users.service';
 import { LoginRoutingModule } from './login-routing.module';
@@ -12,8 +11,7 @@ import { AuthorizationService } from '../../core/shared/services/authorization.s
   imports: [
     CommonModule,
     FormsModule,
-    LoginRoutingModule,
-    NgxSpinnerModule
+    LoginRoutingModule
   ],
   declarations: [LoginComponent],
   providers:  [
