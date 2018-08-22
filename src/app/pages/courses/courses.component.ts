@@ -7,19 +7,5 @@ import { Component } from '@angular/core';
 })
 export class CoursesComponent {
 
-  searchValue: string;
-  nextPage: number;
-
-  constructor() {
-    this.searchValue = '';
-    this.nextPage = 0;
-  }
-
-  onSearch(searchValue: string) {
-    this.searchValue = searchValue;
-  }
-
-  onLoadMore(page: number) {
-    this.nextPage = page;
-  }
+  constructor() {}
 }

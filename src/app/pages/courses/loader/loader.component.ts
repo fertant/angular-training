@@ -1,5 +1,7 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { CoursesService } from '../courses-list/courses.service';
+import { Store } from '@ngrx/store';
+import { CoursesActionTypes } from '../../../core/shared/actions/courses.actions';
 
 @Component({
   selector: 'app-loader',
@@ -8,18 +10,26 @@ import { CoursesService } from '../courses-list/courses.service';
 })
 export class LoaderComponent {
 
-  @Output() page = new EventEmitter<number>();
   currentPage: number;
   loading: boolean;
 
-  constructor(private coursesService: CoursesService) {
+  constructor(
+    private coursesService: CoursesService,
+    private store: Store<any>
+  ) {
     this.loading = false;
   }
 
   onLoad() {
     this.currentPage = this.coursesService.getCurrentPage();
-    this.page.emit(this.currentPage);
-    console.log('Loader click.');
+    this.coursesService.setCurrentPage(this.currentPage + 1);
+    this.store.dispatch({
+      type: CoursesActionTypes.PAGE,
+      payload: {
+        search: this.coursesService.getSearchQuery(),
+        page: (this.currentPage + 1)
+      }
+    });
     this.loading = true;
   }
 }

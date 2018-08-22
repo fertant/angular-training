@@ -1,7 +1,9 @@
-import { Component, Input, OnChanges, SimpleChange } from '@angular/core';
-import { Subject } from 'rxjs';
-import { tap, switchMap } from 'rxjs/operators';
+import { Component } from '@angular/core';
+import { tap } from 'rxjs/operators';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Actions, ofType } from '@ngrx/effects';
+import { SuccessAction, CoursesActionTypes } from '../../../core/shared/actions/courses.actions';
+import { Store } from '@ngrx/store';
 
 import { CourseModel } from '../model/course';
 import { CoursesService } from './courses.service';
@@ -11,35 +13,24 @@ import { CoursesService } from './courses.service';
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.scss'],
 })
-export class CoursesListComponent implements OnChanges {
+export class CoursesListComponent {
 
   courses: Array<CourseModel>;
   canceledCourse: number;
-  @Input() search: string;
-  @Input() page: number;
 
   constructor(
     private coursesService: CoursesService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private actions: Actions,
+    private store: Store<any>
   ) {
     this.courses = [];
-    this.page = this.page ? this.page : 0;
-    this.fetchCourses(this.page, this.search, false);
-  }
-
-  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    for (const propName in changes) {
-      if (!changes[propName].firstChange) {
-        const loadMore = propName === 'page';
-        if (loadMore) {
-          this.page = changes[propName].currentValue;
-          this.fetchCourses(this.page, this.search, loadMore);
-        } else {
-          this.page = 0;
-          this.fetchCourses(this.page, this.search, false);
-        }
-      }
-    }
+    actions.pipe(
+      ofType(CoursesActionTypes.SUCCESS)
+    ).subscribe((state: SuccessAction) => {
+      this.courses = Object.values(state.payload);
+      this.spinner.hide();
+    });
   }
 
   isEmptyCourses(): boolean {
@@ -49,25 +40,17 @@ export class CoursesListComponent implements OnChanges {
   onRemove(courseId: number) {
     return this.coursesService.removeCourse(courseId)
       .pipe(
-        tap(() => { this.canceledCourse = courseId; }),
-        switchMap((res, index) => {
-          this.fetchCourses(this.page, this.search, false);
-          return new Subject();
-      }))
+        tap(() => {
+          this.canceledCourse = courseId;
+          this.store.dispatch({
+            type: CoursesActionTypes.SEARCH,
+            payload: {
+              search: this.coursesService.getSearchQuery(),
+              page: this.coursesService.getCurrentPage()
+            }
+          });
+        }),
+      )
       .subscribe();
-  }
-
-  fetchCourses(offset: number, search: string, loadMore: boolean) {
-    const limit = 3;
-    this.coursesService.getCourses(offset, limit, search)
-      .subscribe(res => {
-        if (loadMore) {
-          this.courses = this.courses.concat(Object.values(res));
-        } else {
-          this.courses = Object.values(res);
-        }
-        this.coursesService.setCurrentPage(offset + limit);
-        this.spinner.hide();
-      });
   }
 }

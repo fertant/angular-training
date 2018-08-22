@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store, select } from '@ngrx/store';
 
 import { AuthorizationService } from '../../services/authorization.service';
 import { UsersService } from '../../../../pages/login/users.service';
@@ -9,24 +10,23 @@ import { UsersService } from '../../../../pages/login/users.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
+  auth: boolean;
   userName: string;
-  @Output() isLogged = new EventEmitter<boolean>();
 
   constructor(
-    public authService: AuthorizationService,
+    private authService: AuthorizationService,
     private userService: UsersService,
-    private router: Router
-  ) { }
-
-  ngOnInit() {
-    if (this.authService.isAuthenticated()) {
-      this.isLogged.emit(true);
-      this.setUser();
-    } else {
-      this.isLogged.emit(false);
-    }
+    private router: Router,
+    private store: Store<any>
+  ) {
+    store.pipe(select('auth')).subscribe((state) => {
+      this.auth = state;
+      if (this.auth) {
+        this.setUser();
+      }
+    });
   }
 
   setUser() {
@@ -42,7 +42,6 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
-    this.isLogged.emit(false);
     console.log('User logged out.');
     this.router.navigateByUrl('login');
   }

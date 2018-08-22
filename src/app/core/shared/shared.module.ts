@@ -6,6 +6,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { AuthorizationService } from './services/authorization.service';
+import { CoursesService } from '../../pages/courses/courses-list/courses.service';
 
 @NgModule({
   imports: [
@@ -22,6 +23,9 @@ import { AuthorizationService } from './services/authorization.service';
     HeaderComponent,
     BreadcrumbComponent
   ],
-  providers: [AuthorizationService]
+  providers: [
+    AuthorizationService,
+    CoursesService
+  ]
 })
 export class SharedModule { }

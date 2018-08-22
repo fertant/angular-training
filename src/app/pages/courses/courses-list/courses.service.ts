@@ -8,6 +8,7 @@ export class CoursesService {
 
   courses: Array<CourseModel>;
   page: number;
+  searchQuery: string;
 
   constructor(private http: HttpClient) {
     this.page = 0;
@@ -19,6 +20,14 @@ export class CoursesService {
 
   setCurrentPage(page: number) {
     this.page = page;
+  }
+
+  getSearchQuery() {
+    return this.searchQuery;
+  }
+
+  setSearchQuery(searchQuery: string) {
+    this.searchQuery = searchQuery;
   }
 
   getCourses(offset?: number, limit?: number, search?: string) {
