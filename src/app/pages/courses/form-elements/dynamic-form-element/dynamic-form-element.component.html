@@ -1,13 +1,13 @@
 <div [formGroup]="form">
   <label [attr.for]="element.key">{{element.label}}</label>
 
-  <div [ngSwitch]="element.controlType">
+  <div [ngSwitch]="element.controlType" class="cross-validation" [class.cross-validation-error]="!isValid">
 
     <input *ngSwitchCase="'textbox'" [formControlName]="element.key"
-           [id]="element.key" [type]="element.type">
+           [id]="element.key" [type]="element.type" class="form-control">
 
     <textarea *ngSwitchCase="'textarea'" [formControlName]="element.key"
-           [id]="element.key"></textarea>
+           [id]="element.key" class="form-control"></textarea>
 
     <div class="form-group" *ngSwitchCase="'multiselect'">
       <angular2-multiselect [data]="element.options"
@@ -34,6 +34,8 @@
       </div>
     </div>
   </div>
-
-  <div class="errorMessage" *ngIf="!isValid">{{element.label}} is required</div>
+  <div *ngIf="!isValid && (form.dirty || form.touched)"
+       class="alert alert-danger">
+    <div>{{ErrorMsg}}</div>
+  </div>
 </div>
