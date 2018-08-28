@@ -34,7 +34,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="!isValid && (form.dirty || form.touched)"
+  <div *ngIf="!isValid && form.get(element.key).touched"
        class="alert alert-danger">
     <div>{{ErrorMsg}}</div>
   </div>

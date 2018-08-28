@@ -24,6 +24,12 @@ export class DynamicFormElementComponent {
                characters in length. Required
                ${this.form.controls[this.element.key].errors[element].requiredLength}.`;
           break;
+          case 'maxlength':
+            errorMsg = `Current value
+               ${this.form.controls[this.element.key].errors[element].actualLength}
+               characters in length. Should be less then
+               ${this.form.controls[this.element.key].errors[element].requiredLength}.`;
+            break;
           case 'notNumber':
             errorMsg = `For element ${this.element.label} value should be a number.`;
             break;

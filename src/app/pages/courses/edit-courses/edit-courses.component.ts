@@ -67,7 +67,7 @@ export class EditCoursesComponent {
         key: 'title',
         label: 'Title',
         value: '',
-        validator: 'minLength',
+        validator: 'maxLength',
         validateProp: 50,
         required: true,
         order: 1
@@ -76,8 +76,8 @@ export class EditCoursesComponent {
         key: 'description',
         label: 'Description',
         value: '',
-        validator: 'minLength',
-        validateProp: 100,
+        validator: 'maxLength',
+        validateProp: 250,
         required: false,
         order: 2
       }),
