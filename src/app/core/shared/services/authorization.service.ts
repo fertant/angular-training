@@ -3,7 +3,7 @@ import { CanActivate } from '@angular/router';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { AUTH, ANONYMOUS } from '../reducers/auth.reducer';
+import { AUTH, ANONYMOUS } from '../store/reducers/auth.reducer';
 
 @Injectable()
 export class AuthorizationService implements CanActivate {

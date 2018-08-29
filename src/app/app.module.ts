@@ -16,8 +16,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppComponent } from './app.component';
 import { Page404Component } from './pages/page404/page404.component';
 import { InterceptorService } from './core/shared/services/interceptor.service';
-import { authReducer } from './core/shared/reducers/auth.reducer';
-import { CoursesEffects } from './core/shared/effects/courses.effects';
+import { authReducer } from './core/shared/store/reducers/auth.reducer';
+import { CoursesEffects } from './core/shared/store/effects/courses.effects';
 
 @NgModule({
   declarations: [

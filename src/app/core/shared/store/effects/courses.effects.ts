@@ -4,7 +4,7 @@ import { Observable, defer, of } from 'rxjs';
 import { tap, distinctUntilChanged, mergeMap, map } from 'rxjs/operators';
 import { SearchAction, LoadMoreAction, CoursesActionTypes, SuccessAction } from '../actions/courses.actions';
 
-import { CoursesService } from '../../../pages/courses/courses-list/courses.service';
+import { CoursesService } from '../../../../pages/courses/courses-list/courses.service';
 
 @Injectable()
 export class CoursesEffects {

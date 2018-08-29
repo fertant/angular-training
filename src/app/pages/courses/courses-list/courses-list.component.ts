@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Actions, ofType } from '@ngrx/effects';
-import { SuccessAction, CoursesActionTypes } from '../../../core/shared/actions/courses.actions';
+import { SuccessAction, CoursesActionTypes } from '../../../core/shared/store/actions/courses.actions';
 import { Store } from '@ngrx/store';
 
 import { CourseModel } from '../model/course';

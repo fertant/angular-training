@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CoursesService } from '../courses-list/courses.service';
 import { Store } from '@ngrx/store';
-import { CoursesActionTypes } from '../../../core/shared/actions/courses.actions';
+import { CoursesActionTypes } from '../../../core/shared/store/actions/courses.actions';
 
 @Component({
   selector: 'app-loader',

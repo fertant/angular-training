@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, filter, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { CoursesActionTypes } from '../../../core/shared/actions/courses.actions';
+import { CoursesActionTypes } from '../../../core/shared/store/actions/courses.actions';
 import { CoursesService } from '../courses-list/courses.service';
 
 @Component({
