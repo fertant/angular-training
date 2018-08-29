@@ -9,15 +9,6 @@ import { CoursesService } from '../../../../pages/courses/courses-list/courses.s
 @Injectable()
 export class CoursesEffects {
 
-  @Effect({ dispatch: false })
-  initState$: Observable<any> = defer(() => of(null)).pipe(
-    mergeMap(action =>
-      this.coursesService.getCourses(0, 3, '').pipe(
-        map((data) => new SuccessAction(data)),
-      )
-    )
-  );
-
   @Effect()
   searchActions$: Observable<any> = this.actions.pipe(
     ofType<SearchAction>(CoursesActionTypes.SEARCH),

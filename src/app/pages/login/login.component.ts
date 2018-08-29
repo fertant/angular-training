@@ -26,11 +26,9 @@ export class LoginComponent {
     this.userService.fetchUser(this.user.email, this.user.password)
       .subscribe((res) => {
         this.loginService.login(this.user.email, res);
-        this.spinner.hide();
         this.router.navigateByUrl('courses');
       }, (err) => {
         this.userValid = false;
-        this.spinner.hide();
       });
   }
 }

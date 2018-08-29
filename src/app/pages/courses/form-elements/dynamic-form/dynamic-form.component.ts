@@ -35,7 +35,6 @@ export class DynamicFormComponent implements OnInit {
     this.value
       .subscribe(data => {
         this.setFormValues(data);
-        this.spinner.hide();
       });
     Object.keys(this.options).forEach(element => {
       this.options[element].subscribe(data => { this.elements[element].options = data; });

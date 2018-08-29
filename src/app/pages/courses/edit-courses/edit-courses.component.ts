@@ -41,9 +41,6 @@ export class EditCoursesComponent {
     this.courses = this.courseId
       ? this.coursesService.findCourseById(Number(this.courseId))
       : of(new CourseModel());
-    this.courses.pipe(
-      tap(() => this.spinner.hide())
-    );
   }
 
   setAuthorsList() {
@@ -56,8 +53,7 @@ export class EditCoursesComponent {
               itemName: author.name
             };
           });
-        }),
-        tap(() => this.spinner.hide())
+        })
       );
   }
 
@@ -122,13 +118,11 @@ export class EditCoursesComponent {
     if (course.id) {
       this.coursesService.updateCourse(course.id, course)
         .subscribe((res) => {
-          this.spinner.hide();
           this.router.navigateByUrl('courses', { skipLocationChange: false });
       });
     } else {
       this.coursesService.addCourse(course)
         .subscribe((res) => {
-          this.spinner.hide();
           this.router.navigateByUrl('courses', { skipLocationChange: false });
       });
     }

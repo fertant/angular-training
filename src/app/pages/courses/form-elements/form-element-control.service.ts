@@ -11,22 +11,18 @@ export class FormElementControlService {
     const group: any = {};
 
     Object.keys(elements).forEach(element => {
+      const validators: Array<any> = [];
+      if (elements[element].required) {
+        validators.push(Validators.required);
+      }
       if (elements[element].validator) {
         if (elements[element].validator === 'number') {
-          group[elements[element].key] = new FormControl(
-            elements[element].value || '',
-            numberValidator()
-          );
+          validators.push(numberValidator());
         } else {
-          group[elements[element].key] = new FormControl(
-            elements[element].value || '',
-            Validators[elements[element].validator](elements[element].validateProp)
-          );
+          validators.push(Validators[elements[element].validator](elements[element].validateProp));
         }
-      } else {
-        group[elements[element].key] = elements[element].required ? new FormControl(elements[element].value || '', Validators.required)
-          : new FormControl(elements[element].value || '');
       }
+      group[elements[element].key] = new FormControl(elements[element].value || '', validators);
     });
     return new FormGroup(group);
   }

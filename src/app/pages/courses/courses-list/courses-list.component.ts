@@ -29,7 +29,6 @@ export class CoursesListComponent {
       ofType(CoursesActionTypes.SUCCESS)
     ).subscribe((state: SuccessAction) => {
       this.courses = Object.values(state.payload);
-      this.spinner.hide();
     });
   }
 
