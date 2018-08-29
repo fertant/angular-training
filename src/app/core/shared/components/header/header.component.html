@@ -3,8 +3,8 @@
     <img src="/assets/angular-white-transparent.svg" alt="courses"><span>Courses</span>
   </a>
   <div class="my-1" id="navbarSupportedContent">
-    <a class="btn btn-outline-white btn-sm my-0" (click)="onLogin()" *ngIf="!authService.isAuthenticated()">User Login <i class="fa fa-wrench text-white"></i></a>
-    <div class="user-info" *ngIf="authService.isAuthenticated()">
+    <a class="btn btn-outline-white btn-sm my-0" (click)="onLogin()" *ngIf="!this.authService.isAuthenticated()">User Login <i class="fa fa-wrench text-white"></i></a>
+    <div class="user-info" *ngIf="this.auth">
       <span class="user-name">Welcome {{ userName }}! </span>
       <a class="btn btn-outline-white btn-sm my-0" (click)="onLogout()">Log off <i class="fa fa-user text-white"></i></a>
     </div>

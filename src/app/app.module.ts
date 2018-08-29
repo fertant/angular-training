@@ -9,10 +9,15 @@ import { UsersService } from './pages/login/users.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppComponent } from './app.component';
 import { Page404Component } from './pages/page404/page404.component';
 import { InterceptorService } from './core/shared/services/interceptor.service';
+import { authReducer } from './core/shared/store/reducers/auth.reducer';
+import { CoursesEffects } from './core/shared/store/effects/courses.effects';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,20 @@ import { InterceptorService } from './core/shared/services/interceptor.service';
     AppRoutingModule,
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    StoreModule.forRoot({
+      auth: authReducer,
+      router: routerReducer
+    }),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router',
+    }),
+    EffectsModule.forRoot([
+      CoursesEffects
+    ]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25
+    })
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [

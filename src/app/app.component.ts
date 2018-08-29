@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthorizationService } from './core/shared/services/authorization.service';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,11 @@ import { AuthorizationService } from './core/shared/services/authorization.servi
 })
 export class AppComponent {
   title = 'app';
-  isLogged: boolean;
+  isLogged: Observable<boolean>;
 
   constructor(
-    private loginService: AuthorizationService,
+    private store: Store<any>
   ) {
-    this.isLogged = this.loginService.isAuthenticated();
+    this.isLogged = store.pipe(select('auth'));
   }
 }

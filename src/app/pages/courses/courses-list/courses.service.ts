@@ -8,6 +8,7 @@ export class CoursesService {
 
   courses: Array<CourseModel>;
   page: number;
+  searchQuery: string;
 
   constructor(private http: HttpClient) {
     this.page = 0;
@@ -19,6 +20,14 @@ export class CoursesService {
 
   setCurrentPage(page: number) {
     this.page = page;
+  }
+
+  getSearchQuery() {
+    return this.searchQuery;
+  }
+
+  setSearchQuery(searchQuery: string) {
+    this.searchQuery = searchQuery;
   }
 
   getCourses(offset?: number, limit?: number, search?: string) {
@@ -72,7 +81,13 @@ export class CoursesService {
             new Date(item['date']),
             item['length'],
             item['description'],
-            item['isTopRated']
+            item['isTopRated'],
+            item['authors'].map(author => {
+              return {
+                ...author,
+                itemName: `${author['firstName']} ${author['lastName']}`
+              };
+            })
           );
         })
       );
@@ -92,5 +107,9 @@ export class CoursesService {
 
   removeCourse(id: number) {
     return this.http.delete('http://localhost:3004/courses/' + id);
+  }
+
+  getAuthorsList() {
+    return this.http.get('http://localhost:3004/authors/');
   }
 }

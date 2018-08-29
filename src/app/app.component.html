@@ -1,11 +1,9 @@
-<ngx-spinner></ngx-spinner>
 <app-header></app-header>
 
 <div class="outer-wrapper">
-  <app-breadcrumb *ngIf="isLogged"></app-breadcrumb>
+  <app-breadcrumb *ngIf="isLogged | async"></app-breadcrumb>
   <router-outlet></router-outlet>
-
-  <main role="main" class="main"></main>
+  <ngx-spinner></ngx-spinner>
 </div>
 
 <app-footer></app-footer>
