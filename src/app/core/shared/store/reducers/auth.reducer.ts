@@ -1,12 +1,13 @@
-import { ActionReducer, Action } from '@ngrx/store';
+import { ActionReducerMap, Action } from '@ngrx/store';
+import { routerReducer } from '@ngrx/router-store';
 
 export const AUTH = 'auth';
 export const ANONYMOUS = 'anonymous';
 
-export const authReducer: ActionReducer<boolean> = (
+export function authReducer(
   store: boolean = false,
   action: Action
-) => {
+): boolean {
   switch (action.type) {
     case AUTH:
       return store = true;
@@ -15,4 +16,9 @@ export const authReducer: ActionReducer<boolean> = (
     default:
       return store;
   }
+}
+
+export const reducers: ActionReducerMap<any> = {
+  auth: authReducer,
+  router: routerReducer
 };

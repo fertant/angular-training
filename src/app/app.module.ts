@@ -11,12 +11,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppComponent } from './app.component';
 import { Page404Component } from './pages/page404/page404.component';
 import { InterceptorService } from './core/shared/services/interceptor.service';
-import { authReducer } from './core/shared/store/reducers/auth.reducer';
+import { reducers } from './core/shared/store/reducers/auth.reducer';
 import { CoursesEffects } from './core/shared/store/effects/courses.effects';
 
 @NgModule({
@@ -32,10 +32,7 @@ import { CoursesEffects } from './core/shared/store/effects/courses.effects';
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     NgxSpinnerModule,
-    StoreModule.forRoot({
-      auth: authReducer,
-      router: routerReducer
-    }),
+    StoreModule.forRoot(reducers),
     StoreRouterConnectingModule.forRoot({
       stateKey: 'router',
     }),

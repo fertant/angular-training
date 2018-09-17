@@ -13,6 +13,7 @@ import { SearchComponent } from './search/search.component';
 import { LoaderComponent } from './loader/loader.component';
 import { EditCoursesComponent } from './edit-courses/edit-courses.component';
 import { DynamicFormComponent } from './form-elements/dynamic-form/dynamic-form.component';
+import { ValidateNumberDirective } from './form-elements/validators/validate-number.directive';
 import { DynamicFormElementComponent } from './form-elements/dynamic-form-element/dynamic-form-element.component';
 import { AuthorizationService } from '../../core/shared/services/authorization.service';
 
@@ -34,7 +35,8 @@ import { AuthorizationService } from '../../core/shared/services/authorization.s
     LoaderComponent,
     EditCoursesComponent,
     DynamicFormComponent,
-    DynamicFormElementComponent
+    DynamicFormElementComponent,
+    ValidateNumberDirective
   ],
   exports: [
     CoursesComponent
