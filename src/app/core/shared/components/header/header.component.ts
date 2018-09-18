@@ -16,7 +16,7 @@ export class HeaderComponent {
   userName: string;
 
   constructor(
-    private authService: AuthorizationService,
+    public authService: AuthorizationService,
     private userService: UsersService,
     private router: Router,
     private store: Store<any>

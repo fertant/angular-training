@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="introductionHeader" datatype="html">
+        <source>
+          Welcome
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/core/shared/components/header.component.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <note priority="1" from="description">An introduction header for this sample</note>
+        <note priority="1" from="meaning">User welcome</note>
+      </trans-unit>
+      <trans-unit id="7eec194fdb5177fb2a2b67ddfd1a5c71a943eb9d" datatype="html">
+        <source>Courses</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/core/shared/components/header.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e17b02c4b6f0deb3e01213657c0c0b3bab9d5786" datatype="html">
+        <source>User Login</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/core/shared/components/header.component.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="337eca335a9813d4a7db932b9238fba36cc4cd28" datatype="html">
+        <source>Log off</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/core/shared/components/header.component.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
